@@ -83,6 +83,12 @@ def inflate(string):
     """Inflates/compresses a string"""
     return zlib.compress(string.encode("utf-8"))
 
+def replace_from_json(string, string_map):
+    """Replace values in a string based on a JSON map"""
+    map = json.loads(string_map)
+    for key, value in map.items():
+        string = string.replace(key, value)
+    return string
 
 ## -- DEFLATE
 def deflate(string):
@@ -286,6 +292,7 @@ custom_filters = [
     ternary, 
     shuffle, 
     to_ascii_json, 
+    replace_from_json,
     { "name": "format_date", "function": get_format_date_function() }
 ]
 
