@@ -317,14 +317,11 @@ for f in custom_filters:
     add_custom_filter_function(f, template._NO_HASS_ENV)
 
 async def async_setup(hass, hass_config):
-    config = hass_config["custom_filters"]
 
     tpl = template.Template("", hass)
 
     for f in custom_filters:
         add_custom_filter_function(f, tpl._env)
 
-    if config["custom_date_format"]:
-        add_custom_filter_function(get_format_date_function(config["custom_date_format"]), tpl._env, template._NO_HASS_ENV)
 
     return True
